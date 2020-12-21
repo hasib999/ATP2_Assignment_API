@@ -85,7 +85,7 @@ namespace Post_Comment.Controllers
             }
         }
 
-        [Route("{pid}/Comments/{cid}")]
+        [Route("{pid}/comments/{cid}")]
         public IHttpActionResult Get([FromUri] int pid, [FromUri] int cid)
         {
             var comment = commentRepository.GetSingleComment(pid, cid);
@@ -100,17 +100,17 @@ namespace Post_Comment.Controllers
         }
 
 
-        [Route("{id}/Comments")]
+        [Route("{id}/comments")]
         public IHttpActionResult Post([FromUri] int id, Comment comment)
         {
             comment.PostId = id;
             comment.Lid = comment.Lid;
 
             commentRepository.Insert(comment);
-            return Created("/api/Posts/" + comment.PostId + "/Comments", comment);
+            return Created("/api/Posts/" + comment.PostId + "/comments", comment);
         }
 
-        [Route("{pid}/Comments/{cid}")]
+        [Route("{pid}/comments/{cid}")]
         public IHttpActionResult Put([FromUri] int pid, [FromUri] int cid, Comment comment)
         {
             comment.PostId = pid;
@@ -119,7 +119,7 @@ namespace Post_Comment.Controllers
             commentRepository.Update(comment);
             return Ok(comment);
         }
-        [Route("{pid}/Comments/{cid}")]
+        [Route("{pid}/comments/{cid}")]
         public IHttpActionResult Deletecomment([FromUri] int pid, [FromUri] int cid)
         {
             commentRepository.Delete(cid);
