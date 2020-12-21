@@ -12,12 +12,12 @@ namespace Post_Comment.Controllers
     public class LoginsController : ApiController
     {
         LoginRepository loginRepository = new LoginRepository();
-        [Route("")]
+        [Route("api/logins")]
         public IHttpActionResult Get()
         {
             return Ok(loginRepository.GetAll());
         }
-        [Route("")]
+        [Route("api/logins")]
         public IHttpActionResult Post(Login login)
         {
             loginRepository.Insert(login);

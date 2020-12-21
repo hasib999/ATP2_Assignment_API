@@ -88,7 +88,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="cdn.txt" />
+    <Content Include="Front_End\Content\CSS\index.css" />
+    <Content Include="Front_End\Content\JS\jquery.session.js" />
+    <Content Include="Front_End\Content\JS\login.js" />
+    <Content Include="Front_End\Views\login.html" />
+    <Content Include="Front_End\Views\index.html" />
+    <Content Include="Front_End\Views\signup.html" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="Models\PostCommentDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PostCommentDB.edmx</DependentUpon>
