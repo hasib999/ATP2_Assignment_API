@@ -14,6 +14,7 @@ namespace Post_Comment.Controllers
     public class PostsController : ApiController
     {
         PostRepository postRepository = new PostRepository();
+        CommentRepository commentRepository = new CommentRepository();
         [Route(""),BasicAuthentication]
         public IHttpActionResult Get()
         {
@@ -69,10 +70,61 @@ namespace Post_Comment.Controllers
 
         //Read All Comments For Post
 
-        [Route("{id}/Comments")]
+        [Route("{id}/comments")]
         public IHttpActionResult GetCommentsByPostId(int id)
         {
-
+            
+            var comments = commentRepository.GetCommentsByPost(id);
+            if(comments.Count<=0)
+            {
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                return Ok(comments);
+            }
         }
+
+        [Route("{pid}/Comments/{cid}")]
+        public IHttpActionResult Get([FromUri] int pid, [FromUri] int cid)
+        {
+            var comment = commentRepository.GetSingleComment(pid, cid);
+            if (comment.Count <= 0)
+            {
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                return Ok(comment);
+            }
+        }
+
+
+        [Route("{id}/Comments")]
+        public IHttpActionResult Post([FromUri] int id, Comment comment)
+        {
+            comment.PostId = id;
+            comment.Lid = comment.Lid;
+
+            commentRepository.Insert(comment);
+            return Created("/api/Posts/" + comment.PostId + "/Comments", comment);
+        }
+
+        [Route("{pid}/Comments/{cid}")]
+        public IHttpActionResult Put([FromUri] int pid, [FromUri] int cid, Comment comment)
+        {
+            comment.PostId = pid;
+            comment.CommentId = cid;
+
+            commentRepository.Update(comment);
+            return Ok(comment);
+        }
+        [Route("{pid}/Comments/{cid}")]
+        public IHttpActionResult Deletecomment([FromUri] int pid, [FromUri] int cid)
+        {
+            commentRepository.Delete(cid);
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
     }
 }
