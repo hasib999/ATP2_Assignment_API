@@ -8,9 +8,9 @@ namespace Post_Comment.Repositories
 {
     public class LoginRepository : Repository<Login>
     {
-        public List<Login> Login(int username, string password)
+        public Login Login(string username, string password)
         {
-            return GetAll().Where(x => x.Lid == username && x.Password==password).ToList();
+            return GetAll().Where(x => x.Username == username && x.Password==password).FirstOrDefault();
         }
     }
 }

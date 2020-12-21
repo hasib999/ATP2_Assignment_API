@@ -25,9 +25,9 @@ namespace Post_Comment.Models
         public string PostDetails { get; set; }
         public int Lid { get; set; }
     
-        public virtual Login Login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual Login Login { get; set; }
     }
 }

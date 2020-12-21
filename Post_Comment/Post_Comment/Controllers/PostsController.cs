@@ -14,7 +14,7 @@ namespace Post_Comment.Controllers
     public class PostsController : ApiController
     {
         PostRepository postRepository = new PostRepository();
-        [Route("")]
+        [Route(""),BasicAuthentication]
         public IHttpActionResult Get()
         {
             return Ok(postRepository.GetAll());
@@ -48,8 +48,8 @@ namespace Post_Comment.Controllers
         [Route("{id}")]
         public IHttpActionResult Delete([FromUri] int id)
         {
-            CommentRepository commentRepository = new CommentRepository();
-            var comm = commentRepository.GetCommentsByPost(id);
+            CommentRepository comrepo = new CommentRepository();
+            var comm = comrepo.GetCommentsByPost(id);
             if (comm == null)
             {
             }
@@ -57,12 +57,22 @@ namespace Post_Comment.Controllers
             {
                 foreach (var item in comm)
                 {
-                    commentRepository.Delete(item.CommentId);
+                    comrepo.Delete(item.CommentId);
                 }
             }
 
             postRepository.Delete(id);
             return StatusCode(HttpStatusCode.NoContent);
+            
+        }
+
+
+        //Read All Comments For Post
+
+        [Route("{id}/Comments")]
+        public IHttpActionResult GetCommentsByPostId(int id)
+        {
+
         }
     }
 }

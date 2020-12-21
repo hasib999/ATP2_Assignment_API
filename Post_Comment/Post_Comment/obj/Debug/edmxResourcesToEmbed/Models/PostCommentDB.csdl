@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="PostCommentDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CommentDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PostId" Type="Int32" Nullable="false" />
+    <Property Name="Lid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Login" Relationship="Self.FK_Comment_Login" FromRole="Comment" ToRole="Login" />
+    <NavigationProperty Name="Post" Relationship="Self.FK_Comment_Post" FromRole="Comment" ToRole="Post" />
+  </EntityType>
   <EntityType Name="Login">
     <Key>
       <PropertyRef Name="Lid" />
@@ -7,8 +18,8 @@
     <Property Name="Lid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Login1" FromRole="Login" ToRole="Comment" />
-    <NavigationProperty Name="Posts" Relationship="Self.FK_Post_Login1" FromRole="Login" ToRole="Post" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Login" FromRole="Login" ToRole="Comment" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK_Post_Login" FromRole="Login" ToRole="Post" />
   </EntityType>
   <EntityType Name="Post">
     <Key>
@@ -17,8 +28,8 @@
     <Property Name="PostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PostDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Lid" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Login" Relationship="Self.FK_Post_Login1" FromRole="Post" ToRole="Login" />
-    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Post1" FromRole="Post" ToRole="Comment" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Post" FromRole="Post" ToRole="Comment" />
+    <NavigationProperty Name="Login" Relationship="Self.FK_Post_Login" FromRole="Post" ToRole="Login" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -30,21 +41,7 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <EntityType Name="Comment">
-    <Key>
-      <PropertyRef Name="CommentId" />
-      <PropertyRef Name="CommentDetails" />
-      <PropertyRef Name="PostId" />
-      <PropertyRef Name="Lid" />
-    </Key>
-    <Property Name="CommentId" Type="Int32" Nullable="false" />
-    <Property Name="CommentDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="PostId" Type="Int32" Nullable="false" />
-    <Property Name="Lid" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Login" Relationship="Self.FK_Comment_Login1" FromRole="Comment" ToRole="Login" />
-    <NavigationProperty Name="Post" Relationship="Self.FK_Comment_Post1" FromRole="Comment" ToRole="Post" />
-  </EntityType>
-  <Association Name="FK_Comment_Login1">
+  <Association Name="FK_Comment_Login">
     <End Role="Login" Type="Self.Login" Multiplicity="1" />
     <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
     <ReferentialConstraint>
@@ -56,19 +53,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Post_Login1">
-    <End Role="Login" Type="Self.Login" Multiplicity="1" />
-    <End Role="Post" Type="Self.Post" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Login">
-        <PropertyRef Name="Lid" />
-      </Principal>
-      <Dependent Role="Post">
-        <PropertyRef Name="Lid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Comment_Post1">
+  <Association Name="FK_Comment_Post">
     <End Role="Post" Type="Self.Post" Multiplicity="1" />
     <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
     <ReferentialConstraint>
@@ -80,22 +65,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Post_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="Lid" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="Lid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="PostCommentDBContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
     <EntitySet Name="Logins" EntityType="Self.Login" />
     <EntitySet Name="Posts" EntityType="Self.Post" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-    <EntitySet Name="Comments" EntityType="Self.Comment" />
-    <AssociationSet Name="FK_Comment_Login1" Association="Self.FK_Comment_Login1">
+    <AssociationSet Name="FK_Comment_Login" Association="Self.FK_Comment_Login">
       <End Role="Login" EntitySet="Logins" />
       <End Role="Comment" EntitySet="Comments" />
     </AssociationSet>
-    <AssociationSet Name="FK_Post_Login1" Association="Self.FK_Post_Login1">
-      <End Role="Login" EntitySet="Logins" />
-      <End Role="Post" EntitySet="Posts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Comment_Post1" Association="Self.FK_Comment_Post1">
+    <AssociationSet Name="FK_Comment_Post" Association="Self.FK_Comment_Post">
       <End Role="Post" EntitySet="Posts" />
       <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_Login" Association="Self.FK_Post_Login">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="Post" EntitySet="Posts" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="887632789bcb43c298172989b5e9eb52" Name="Diagram1">
+      <Diagram DiagramId="bcfddc525893423989c6a3c5d7501214" Name="Diagram1">
+        <EntityTypeShape EntityType="PostCommentDBModel.Comment" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PostCommentDBModel.Login" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PostCommentDBModel.Post" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PostCommentDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PostCommentDBModel.Comment" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
-        <AssociationConnector Association="PostCommentDBModel.FK_Comment_Login1" ManuallyRouted="false" />
-        <AssociationConnector Association="PostCommentDBModel.FK_Post_Login1" ManuallyRouted="false" />
-        <AssociationConnector Association="PostCommentDBModel.FK_Comment_Post1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PostCommentDBModel.Post" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostCommentDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="PostCommentDBModel.FK_Comment_Login" ManuallyRouted="false" />
+        <AssociationConnector Association="PostCommentDBModel.FK_Comment_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="PostCommentDBModel.FK_Post_Login" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -21,6 +21,5 @@ namespace Post_Comment.Models
     
         public virtual Login Login { get; set; }
         public virtual Post Post { get; set; }
-        
     }
 }

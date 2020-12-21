@@ -32,13 +32,13 @@ namespace Post_Comment.Attribute
                 string username = splitedString[0];
                 string password = splitedString[1];
                 //int password = Convert.ToInt32(splitedString[1]);
-                int user = Int32.Parse(splitedString[0]);
+                /*int user = Int32.Parse(splitedString[0]);*/
                 //Console.WriteLine(username);
 
                 LoginRepository logrepo = new LoginRepository();
-                var userlist = logrepo.Login(user, password);
+                var userlist = logrepo.Login(username, password);
 
-                if (userlist.Count == 1)
+                if (userlist.Username == username && userlist.Password==password)
                 {
                     Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(username), null);
                 }

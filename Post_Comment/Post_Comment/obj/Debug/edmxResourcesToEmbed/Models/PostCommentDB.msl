@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="PostCommentDBModelStoreContainer" CdmEntityContainer="PostCommentDBContext">
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="PostCommentDBModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+          <ScalarProperty Name="CommentDetails" ColumnName="CommentDetails" />
+          <ScalarProperty Name="PostId" ColumnName="PostId" />
+          <ScalarProperty Name="Lid" ColumnName="Lid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Logins">
       <EntityTypeMapping TypeName="PostCommentDBModel.Login">
         <MappingFragment StoreEntitySet="Login">
@@ -27,16 +37,6 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Comments">
-      <EntityTypeMapping TypeName="PostCommentDBModel.Comment">
-        <MappingFragment StoreEntitySet="Comment">
-          <ScalarProperty Name="CommentId" ColumnName="CommentId" />
-          <ScalarProperty Name="CommentDetails" ColumnName="CommentDetails" />
-          <ScalarProperty Name="PostId" ColumnName="PostId" />
-          <ScalarProperty Name="Lid" ColumnName="Lid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

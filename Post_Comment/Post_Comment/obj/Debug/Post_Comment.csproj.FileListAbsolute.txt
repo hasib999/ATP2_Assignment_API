@@ -41,7 +41,6 @@ C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\bin\System.Net.Htt
 C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\bin\System.Web.Http.xml
 C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\bin\System.Web.Http.WebHost.xml
 C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\obj\Debug\Post_Comment.csprojAssemblyReference.cache
 C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\obj\Debug\Post_Comment.csproj.CoreCompileInputs.cache
 C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\obj\Debug\Post_Comment.csproj.CopyComplete
 C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\obj\Debug\Post_Comment.dll

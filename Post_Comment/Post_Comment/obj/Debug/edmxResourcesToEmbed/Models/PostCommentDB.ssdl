@@ -1,15 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="PostCommentDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'PostCommentDB.dbo.Comment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Comment">
     <Key>
       <PropertyRef Name="CommentId" />
-      <PropertyRef Name="CommentDetails" />
-      <PropertyRef Name="PostId" />
-      <PropertyRef Name="Lid" />
     </Key>
-    <Property Name="CommentId" Type="int" Nullable="false" />
+    <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CommentDetails" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="PostId" Type="int" Nullable="false" />
     <Property Name="Lid" Type="int" Nullable="false" />
@@ -40,7 +35,7 @@ warning 6002: The table/view 'PostCommentDB.dbo.Comment' does not have a primary
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
-  <Association Name="FK_Comment_Login1">
+  <Association Name="FK_Comment_Login">
     <End Role="Login" Type="Self.Login" Multiplicity="1" />
     <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
     <ReferentialConstraint>
@@ -52,7 +47,7 @@ warning 6002: The table/view 'PostCommentDB.dbo.Comment' does not have a primary
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Comment_Post1">
+  <Association Name="FK_Comment_Post">
     <End Role="Post" Type="Self.Post" Multiplicity="1" />
     <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
     <ReferentialConstraint>
@@ -64,7 +59,7 @@ warning 6002: The table/view 'PostCommentDB.dbo.Comment' does not have a primary
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Post_Login1">
+  <Association Name="FK_Post_Login">
     <End Role="Login" Type="Self.Login" Multiplicity="1" />
     <End Role="Post" Type="Self.Post" Multiplicity="*" />
     <ReferentialConstraint>
@@ -77,26 +72,19 @@ warning 6002: The table/view 'PostCommentDB.dbo.Comment' does not have a primary
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="PostCommentDBModelStoreContainer">
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Comment" EntityType="Self.Comment" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Comment].[CommentId] AS [CommentId], 
-    [Comment].[CommentDetails] AS [CommentDetails], 
-    [Comment].[PostId] AS [PostId], 
-    [Comment].[Lid] AS [Lid]
-    FROM [dbo].[Comment] AS [Comment]</DefiningQuery>
-    </EntitySet>
-    <AssociationSet Name="FK_Comment_Login1" Association="Self.FK_Comment_Login1">
+    <AssociationSet Name="FK_Comment_Login" Association="Self.FK_Comment_Login">
       <End Role="Login" EntitySet="Login" />
       <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
-    <AssociationSet Name="FK_Comment_Post1" Association="Self.FK_Comment_Post1">
+    <AssociationSet Name="FK_Comment_Post" Association="Self.FK_Comment_Post">
       <End Role="Post" EntitySet="Post" />
       <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
-    <AssociationSet Name="FK_Post_Login1" Association="Self.FK_Post_Login1">
+    <AssociationSet Name="FK_Post_Login" Association="Self.FK_Post_Login">
       <End Role="Login" EntitySet="Login" />
       <End Role="Post" EntitySet="Post" />
     </AssociationSet>
