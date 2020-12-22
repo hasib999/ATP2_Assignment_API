@@ -29,7 +29,7 @@
 		$("#upCommentDetails").val("");
 		sessionStorage.removeItem('user');
 		sessionStorage.removeItem('pass');
-		window.location.href = "/Font_end/Views/login.html";
+		window.location.href = "/Front_End/Views/login.html";
 	});
 
 	$("#commentRefreshBtn").click(function () {
@@ -60,14 +60,14 @@
 					var str;
 					for (var i = 0; i < data.length; i++) {
 
-						str += "<tr><td>" + data[i].postId + "</td><td>" + data[i].postDetails + "</td><td><button btn-id-user=" + data[i].lid + " btn-id-post=" + data[i].postId + " id='DeleteBtn'>Delete</button></td><td><button btn-id-postId=" + data[i].postId + " id='loadBtn'>Load</button></td><td><button btn-id-postId=" + data[i].postId + " id='viewBtn'>Comments</button></td></tr>"
+						str += "<tr><td>" + data[i].postId + "</td><td>" + data[i].postDetails + "</td><td><button class='btn btn-danger' btn-id-user=" + data[i].lid + " btn-id-post=" + data[i].postId + " id='DeleteBtn'>Delete</button></td><td><button class='btn btn-primary' btn-id-postId=" + data[i].postId + " id='loadBtn'>Load</button></td><td><button class='btn btn-warning' btn-id-postId=" + data[i].postId + " id='viewBtn'>Comments</button></td></tr>"
 					}
 					$("#postList tbody").html(str);
 					$("#welcome").html("<b>Welcome! " + $.session.get('user') + "</b>");
 				}
 				else {
 
-					window.location.href = "/Font_end/Views/login.html";
+					window.location.href = "/Front_End/Views/login.html";
 				}
 			}
 		});

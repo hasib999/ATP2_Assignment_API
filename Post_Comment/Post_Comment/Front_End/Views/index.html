@@ -17,21 +17,21 @@
 
 </head>
 <body>
-    <div class="container">
+    <div class="container bx">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="tab">
-                    <button class="tablinks" onclick="GetTable(event, 'Home')">Home</button>
-                    <button class="tablinks" onclick="GetTable(event, 'Create')">Create Post</button>
-                    <button class="tablinks" onclick="GetTable(event, 'update')">Update Post</button>
-                    <button class="tablinks" onclick="GetTable(event, 'Modify')">Update Comment</button>
-                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <button id="welcome"></button>
-                    &nbsp &nbsp &nbsp <button id="logout">Logout</button>
+                    <button class="tablinks btn btn-info" onclick="GetTable(event, 'Home')">Home</button>
+                    <button class="tablinks btn btn-info" onclick="GetTable(event, 'Create')">Create Post</button>
+                    <button class="tablinks btn btn-info" onclick="GetTable(event, 'update')">Update Post</button>
+                    <button class="tablinks btn btn-info" onclick="GetTable(event, 'Modify')">Update Comment</button>
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <button class="btn btn-info" id="welcome"></button>
+                    &nbsp &nbsp &nbsp <button class="btn btn-info" id="logout">Logout</button>
 
 
                 </div>
                 <div id="Create" class="tabcontent">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-dark table-hover">
                         <tr>
                             <td>
                                 Post
@@ -42,14 +42,14 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button id="saveBtn">Create</button>
+                                <button class="btn btn-success" id="saveBtn">Create</button>
                             </td>
                         </tr>
                     </table>
                 </div>
 
                 <div id="update" class="tabcontent">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-dark table-hover">
                         <tr>
                             <td>
                                 Post Id
@@ -69,14 +69,14 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button id="updateBtn">Update Post</button>
+                                <button class="btn btn-success" id="updateBtn">Update Post</button>
                             </td>
                         </tr>
                     </table>
                 </div>
 
                 <div id="Modify" class="tabcontent">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-dark table-hover">
                         <tr>
                             <td>
                                 Post
@@ -96,7 +96,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button id="modifyBtn">Update Comment</button>
+                                <button class="btn btn-success" id="modifyBtn">Update Comment</button>
                             </td>
                         </tr>
                     </table>
@@ -106,18 +106,18 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <p id="msg"></p>
                     <p id="msg2"></p>
-                    <br><hr>
+                    <br>
                     <div id="search">
                         <input type="text" placeholder="Search by Id" class="search" id="postId">
-                        <button id="refreshBtn">Refresh</button>
+                        <button class="btn btn-warning" id="refreshBtn">Refresh</button>
                     </div>
 
 
                     <table class="table table-bordered table-hover table-striped" id="postList">
 
-                        <thead>
+                        <thead class="">
                             <tr>
-                                <th>
+                                <th >
                                     Post Id
                                 </th>
                                 <th>
@@ -137,9 +137,9 @@
                     <hr>
                     <div id="searchComment">
                         <input type="text" placeholder="Search by Comment Id" class="searchComment" id="commentId">
-                        <button id="commentRefreshBtn">Refresh</button> &nbsp &nbsp &nbsp
+                        <button class='btn btn-success' id="commentRefreshBtn">Refresh</button> &nbsp &nbsp &nbsp
                         <input style="width:220px;" type="text" placeholder="Add Comment" class="addComment">
-                        <button id="addCommentBtn">Add</button>
+                        <button class='btn btn-success' id="addCommentBtn">Add</button>
                     </div>
                     <table class="table table-bordered table-hover table-striped" id="commentList">
 
