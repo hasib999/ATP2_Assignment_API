@@ -29,7 +29,7 @@
 		$("#upCommentDetails").val("");
 		sessionStorage.removeItem('user');
 		sessionStorage.removeItem('pass');
-		window.location.href = "/Front_End/Views/login.html";
+		window.location.href = "/Font_end/Views/login.html";
 	});
 
 	$("#commentRefreshBtn").click(function () {
@@ -44,11 +44,11 @@
 	});
 
 
-	//Show post List
+
 
 	var listPost = function () {
 		$.ajax({
-			url: "http://localhost:59954/api/posts",
+			url: "http://localhost:59954/api/Posts",
 			method: "GET",
 			headers: {
 				Authorization: "Basic " + btoa($.session.get('user') + ":" + $.session.get('pass'))
@@ -57,41 +57,33 @@
 
 				if (xmlhttp.status == 200) {
 					var data = xmlhttp.responseJSON;
-					console.log(data);
 					var str;
 					for (var i = 0; i < data.length; i++) {
 
-						str += "<tr><td>" + data[i].PostId + "</td><td>" + data[i].PostDetails
-							+ "</td><td><button btn-id-user=" + data[i].Lid + " btn-id-post="
-							+ data[i].PostId + " id='DeleteBtn'>Delete</button></td><td><button btn-id-postId="
-							+ data[i].PostId + " id='loadBtn'>Load</button></td><td><button btn-id-postId="
-							+ data[i].PostId + " id='viewBtn'>Comments</button></td></tr>"
+						str += "<tr><td>" + data[i].postId + "</td><td>" + data[i].postDetails + "</td><td><button btn-id-user=" + data[i].lid + " btn-id-post=" + data[i].postId + " id='DeleteBtn'>Delete</button></td><td><button btn-id-postId=" + data[i].postId + " id='loadBtn'>Load</button></td><td><button btn-id-postId=" + data[i].postId + " id='viewBtn'>Comments</button></td></tr>"
 					}
-				
 					$("#postList tbody").html(str);
 					$("#welcome").html("<b>Welcome! " + $.session.get('user') + "</b>");
 				}
 				else {
 
-					window.location.href = "/Front_End/Views/login.html";
+					window.location.href = "/Font_end/Views/login.html";
 				}
 			}
 		});
 	}
 
 
-	// createPost
-
 	listPost();
 
 	var createPost = function () {
 		$.ajax({
-			url: "http://localhost:59954/api/posts",
+			url: "http://localhost:59954/api/Posts",
 			method: "POST",
 			header: "Content-Type:application/json",
 			data: {
 				postDetails: $("#postDetails").val(),
-				Lid: $.session.get('user')
+				lid: $.session.get('user')
 			},
 			complete: function (xmlhttp, status) {
 				if ($("#postDetails").val() != "") {
@@ -118,7 +110,7 @@
 		if (confirm("Are you sure you want to delete this Post?")) {
 			if (button.attr("btn-id-user") == $.session.get('user')) {
 				$.ajax({
-					url: "http://localhost:59954/api/posts/" + button.attr("btn-id-post"),
+					url: "http://localhost:59954/api/Posts/" + button.attr("btn-id-post"),
 					method: "Delete",
 					/*header:"Content-Type:application/json",
 					data:{
@@ -157,10 +149,10 @@
 
 	//Search Function for posts starts from here
 
-	/*$(".search").keyup(function () {
+	$(".search").keyup(function () {
 		var button = $(this);
 		$.ajax({
-			url: "http://localhost:59954/api/posts/" + $("#postId").val(),
+			url: "http://localhost:59954/api/Posts/" + $("#postId").val(),
 			method: "Get",
 			complete: function (xmlhttp, status) {
 
@@ -168,14 +160,15 @@
 					if (xmlhttp.status == 200) {
 						var data = xmlhttp.responseJSON;
 						var str;
-						str = "<tr><td>" + data.postId + "</td><td>" +
-							data.postDetails + "</td><td><button btn-id-user=" +
-							data[i].lid + " btn-id-post=" + data.postId +
-							" id='DeleteBtn'>Delete</button></td><td><button btn-id-postId=" +
-							data.postId + " id='loadBtn'>Load</button></td><td><button btn-id-postId=" +
-							data.postId + " id='viewBtn'>Comments</button></td></tr>"
+						str = "<tr><td>" + data.postId + "</td><td>"
+							+ data.postDetails + "</td><td><button btn-id-user="
+							+ data.lid + " btn-id-post=" + data.postId
+							+ " id='DeleteBtn'>Delete</button></td><td><button btn-id-postId="
+							+ data.postId + " id='loadBtn'>Load</button></td><td><button btn-id-postId="
+							+ data.postId + " id='viewBtn'>Comments</button></td></tr>"
 						$("#postList tbody").html(str);
 						$("#msg").html("");
+						console.log(str);
 					}
 					else {
 
@@ -190,7 +183,7 @@
 
 
 
-	});*/
+	});
 	//Search Function for posts Ends here
 
 	//Update Function starts from here
@@ -198,7 +191,7 @@
 	$("#update").on("click", "#updateBtn", function () {
 
 		$.ajax({
-			url: "http://localhost:59954/api/posts/" + $("#upPostId").val(),
+			url: "http://localhost:59954/api/Posts/" + $("#upPostId").val(),
 			method: "PUT",
 			header: "Content-Type:application/json",
 			data: {
@@ -233,13 +226,13 @@
 	$("#postList").on("click", "#loadBtn", function () {
 		var button = $(this);
 		$.ajax({
-			url: "http://localhost:59954/api/posts/" + button.attr("btn-id-postId"),
+			url: "http://localhost:59954/api/Posts/" + button.attr("btn-id-postId"),
 			method: "Get",
 			complete: function (xmlhttp, status) {
 				if (xmlhttp.status == 200) {
 					var data = xmlhttp.responseJSON;
 					//var Lid=($.session.get('user'));
-					if (data.Lid == $.session.get('user')) {
+					if (data.lid == $.session.get('user')) {
 						GetTable(event, 'update');
 						$("#upPostId").val(data.postId);
 						$("#upPostDetails").val(data.postDetails);
@@ -265,7 +258,7 @@
 	$("#postList").on("click", "#viewBtn", function () {
 		var button = $(this);
 		$.ajax({
-			url: "http://localhost:59954/api/posts/" + button.attr("btn-id-postId") + "/comments",
+			url: "http://localhost:59954/api/Posts/" + button.attr("btn-id-postId") + "/Comments",
 			method: "Get",
 			complete: function (xmlhttp, status) {
 				if (xmlhttp.status != 204) {
@@ -275,12 +268,7 @@
 						$("#getPost").val(data[0].post.postDetails);
 						$("#hiddenPostId").val(data[0].post.postId);
 						for (var i = 0; i < data.length; i++) {
-							str += "<tr><td>" + data[i].commentId + "</td><td>"
-								+ data[i].commentDetails + "</td><td><button btn-lid-user="
-								+ data[i].lid + " btn-id="
-								+ data[i].commentId
-								+ " id='DeleteBtn'>Delete</button></td><td><button btn-id-commentId="
-								+ data[i].commentId + " id='loadBtn'>Load</button></td></tr>"
+							str += "<tr><td>" + data[i].commentId + "</td><td>" + data[i].commentDetails + "</td><td><button btn-lid-user=" + data[i].lid + " btn-id=" + data[i].commentId + " id='DeleteBtn'>Delete</button></td><td><button btn-id-commentId=" + data[i].commentId + " id='loadBtn'>Load</button></td></tr>"
 						}
 						$("#commentList tbody").html(str);
 						$("#msg").html("");
@@ -294,7 +282,7 @@
 				else {
 
 					$.ajax({
-						url: "http://localhost:59954/api/posts/" + button.attr("btn-id-postId"),
+						url: "http://localhost:59954/api/Posts/" + button.attr("btn-id-postId"),
 						method: "Get",
 						complete: function (xmlhttp, status) {
 							var data = xmlhttp.responseJSON;
@@ -320,7 +308,7 @@
 
 	var searchList = function () {
 		$.ajax({
-			url: "http://localhost:59954/api/posts/" + $("#hiddenPostId").val() + "/comments/" + $("#commentId").val(),
+			url: "http://localhost:59954/api/Posts/" + $("#hiddenPostId").val() + "/Comments/" + $("#commentId").val(),
 			method: "Get",
 			complete: function (xmlhttp, status) {
 
@@ -358,7 +346,7 @@
 			console.log($.session.get('user'));
 			if (button.attr("btn-lid-user") == $.session.get('user')) {
 				$.ajax({
-					url: "http://localhost:59954/api/posts/" + $("#hiddenPostId").val() + "/comments/" + button.attr("btn-id"),
+					url: "http://localhost:59954/api/Posts/" + $("#hiddenPostId").val() + "/Comments/" + button.attr("btn-id"),
 					method: "Delete",
 					complete: function (xmlhttp, status) {
 
@@ -391,7 +379,7 @@
 
 	$("#searchComment").on("click", "#addCommentBtn", function () {
 		$.ajax({
-			url: "http://localhost:59954/api/posts/" + $("#hiddenPostId").val() + "/comments",
+			url: "http://localhost:59954/api/Posts/" + $("#hiddenPostId").val() + "/Comments",
 			method: "POST",
 			header: "Content-Type:application/json",
 			data: {
@@ -423,7 +411,7 @@
 	$("#commentList").on("click", "#loadBtn", function () {
 		var button = $(this);
 		$.ajax({
-			url: "http://localhost:59954/api/posts/" + $("#hiddenPostId").val() + "/comments/" + button.attr("btn-id-commentId"),
+			url: "http://localhost:59954/api/Posts/" + $("#hiddenPostId").val() + "/Comments/" + button.attr("btn-id-commentId"),
 			method: "Get",
 			complete: function (xmlhttp, status) {
 				if (xmlhttp.status == 200) {
@@ -456,7 +444,7 @@
 	$("#Modify").on("click", "#modifyBtn", function () {
 
 		$.ajax({
-			url: "http://localhost:59954/api/posts/" + $("#hiddenPostId").val() + "/comments/" + $("#hiddenCommentId").val(),
+			url: "http://localhost:59954/api/Posts/" + $("#hiddenPostId").val() + "/Comments/" + $("#hiddenCommentId").val(),
 			method: "PUT",
 			header: "Content-Type:application/json",
 			data: {

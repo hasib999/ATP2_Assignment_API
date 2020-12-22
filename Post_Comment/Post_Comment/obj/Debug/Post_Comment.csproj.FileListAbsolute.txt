@@ -46,3 +46,6 @@ C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\obj\Debug\Post_Com
 C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\obj\Debug\Post_Comment.dll
 C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\obj\Debug\Post_Comment.pdb
 C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\obj\Debug\Post_Comment.csprojAssemblyReference.cache
+C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\bin\System.Web.Cors.dll
+C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\bin\System.Web.Http.Cors.dll
+C:\xampp\htdocs\ATP2_Assignment_API\Post_Comment\Post_Comment\bin\System.Web.Http.Cors.xml
