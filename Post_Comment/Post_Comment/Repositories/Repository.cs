@@ -10,7 +10,7 @@ namespace Post_Comment.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected PostCommentDBContext context = new PostCommentDBContext();
+        protected postcommentDBEntities context = new postcommentDBEntities();
         public void Delete(int id)
         {
             context.Set<T>().Remove(Get(id));

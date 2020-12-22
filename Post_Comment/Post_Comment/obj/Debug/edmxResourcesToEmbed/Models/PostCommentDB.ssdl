@@ -1,92 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="PostCommentDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Comment">
+<Schema Namespace="postcommentDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comments">
     <Key>
       <PropertyRef Name="CommentId" />
     </Key>
     <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CommentDetails" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CommentDetails" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PostId" Type="int" Nullable="false" />
     <Property Name="Lid" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Login">
+  <EntityType Name="Logins">
     <Key>
       <PropertyRef Name="Lid" />
     </Key>
     <Property Name="Lid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <EntityType Name="Post">
+  <EntityType Name="Posts">
     <Key>
       <PropertyRef Name="PostId" />
     </Key>
     <Property Name="PostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PostDetails" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PostDetails" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Lid" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
-  <Association Name="FK_Comment_Login">
-    <End Role="Login" Type="Self.Login" Multiplicity="1" />
-    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+  <Association Name="FK_Logins_Comments">
+    <End Role="Logins" Type="Self.Logins" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Login">
+      <Principal Role="Logins">
         <PropertyRef Name="Lid" />
       </Principal>
-      <Dependent Role="Comment">
+      <Dependent Role="Comments">
         <PropertyRef Name="Lid" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Comment_Post">
-    <End Role="Post" Type="Self.Post" Multiplicity="1" />
-    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+  <Association Name="FK_Logins_Posts">
+    <End Role="Logins" Type="Self.Logins" Multiplicity="1" />
+    <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Post">
+      <Principal Role="Logins">
+        <PropertyRef Name="Lid" />
+      </Principal>
+      <Dependent Role="Posts">
+        <PropertyRef Name="Lid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Posts_Comments">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
         <PropertyRef Name="PostId" />
       </Principal>
-      <Dependent Role="Comment">
+      <Dependent Role="Comments">
         <PropertyRef Name="PostId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Post_Login">
-    <End Role="Login" Type="Self.Login" Multiplicity="1" />
-    <End Role="Post" Type="Self.Post" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Login">
-        <PropertyRef Name="Lid" />
-      </Principal>
-      <Dependent Role="Post">
-        <PropertyRef Name="Lid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityContainer Name="PostCommentDBModelStoreContainer">
-    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Comment_Login" Association="Self.FK_Comment_Login">
-      <End Role="Login" EntitySet="Login" />
-      <End Role="Comment" EntitySet="Comment" />
+  <EntityContainer Name="postcommentDBModelStoreContainer">
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Logins_Comments" Association="Self.FK_Logins_Comments">
+      <End Role="Logins" EntitySet="Logins" />
+      <End Role="Comments" EntitySet="Comments" />
     </AssociationSet>
-    <AssociationSet Name="FK_Comment_Post" Association="Self.FK_Comment_Post">
-      <End Role="Post" EntitySet="Post" />
-      <End Role="Comment" EntitySet="Comment" />
+    <AssociationSet Name="FK_Logins_Posts" Association="Self.FK_Logins_Posts">
+      <End Role="Logins" EntitySet="Logins" />
+      <End Role="Posts" EntitySet="Posts" />
     </AssociationSet>
-    <AssociationSet Name="FK_Post_Login" Association="Self.FK_Post_Login">
-      <End Role="Login" EntitySet="Login" />
-      <End Role="Post" EntitySet="Post" />
+    <AssociationSet Name="FK_Posts_Comments" Association="Self.FK_Posts_Comments">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Comments" EntitySet="Comments" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -1,10 +1,189 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <title>Client data</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/Front_End/Content/JS/post.js"></script>
+    <script src="/Front_End/Content/JS/jquery.session.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Front_End/Content/CSS/tabstyle.css">
+
+
+
 </head>
 <body>
-    <h1>Success</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tab">
+                    <button class="tablinks" onclick="GetTable(event, 'Home')">Home</button>
+                    <button class="tablinks" onclick="GetTable(event, 'Create')">Create Post</button>
+                    <button class="tablinks" onclick="GetTable(event, 'update')">Update Post</button>
+                    <button class="tablinks" onclick="GetTable(event, 'Modify')">Update Comment</button>
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <button id="welcome"></button>
+                    &nbsp &nbsp &nbsp <button id="logout">Logout</button>
+
+
+                </div>
+                <div id="Create" class="tabcontent">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                Post
+                            </td>
+                            <td>
+                                <textarea rows="4" cols="50" id="postDetails"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button id="saveBtn">Create</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="update" class="tabcontent">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                Post Id
+                            </td>
+                            <td>
+                                <input type="text" id="upPostId">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Post Details
+                            </td>
+                            <td>
+                                <textarea rows="4" cols="50" id="upPostDetails"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button id="updateBtn">Update Post</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="Modify" class="tabcontent">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                Post
+                            </td>
+                            <td>
+                                <input type="text" id="upPost" readonly="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Comment
+                            </td>
+                            <td>
+                                <textarea rows="4" cols="50" id="upCommentDetails"></textarea>
+                                <input type="text" id="hiddenCommentId" hidden="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button id="modifyBtn">Update Comment</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <p id="msg"></p>
+                    <p id="msg2"></p>
+                    <br><hr>
+                    <!--<div id="search">
+                        <input type="text" placeholder="Search by Id" class="search" id="postId">
+                        <button id="refreshBtn">Refresh</button>
+                    </div>-->
+
+
+                    <table class="table table-bordered table-hover table-striped" id="postList">
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    Post Id
+                                </th>
+                                <th>
+                                    Post Deatils
+                                </th>
+                                <th colspan="3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="margin-top: 100px;">
+
+                    <b>Post Details:</b> <br><textarea rows="2" cols="74" style=" border:none; text-decoration: underline; color:blue;" id="getPost" readonly=""></textarea>
+                    <input type="text" id="hiddenPostId" hidden="">
+                    <hr>
+                    <div id="searchComment">
+                        <input type="text" placeholder="Search by Comment Id" class="searchComment" id="commentId">
+                        <button id="commentRefreshBtn">Refresh</button> &nbsp &nbsp &nbsp
+                        <input style="width:220px;" type="text" placeholder="Add Comment" class="addComment">
+                        <button id="addCommentBtn">Add</button>
+                    </div>
+                    <table class="table table-bordered table-hover table-striped" id="commentList">
+
+
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    Comment Id
+                                </th>
+                                <th>
+                                    Comments
+                                </th>
+                                <th colspan="2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        function GetTable(evt, actionName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(actionName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+
 </body>
 </html>

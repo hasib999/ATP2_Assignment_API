@@ -13,10 +13,10 @@ namespace Post_Comment.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PostCommentDBContext : DbContext
+    public partial class postcommentDBEntities : DbContext
     {
-        public PostCommentDBContext()
-            : base("name=PostCommentDBContext")
+        public postcommentDBEntities()
+            : base("name=postcommentDBEntities")
         {
         }
     
@@ -28,6 +28,5 @@ namespace Post_Comment.Models
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

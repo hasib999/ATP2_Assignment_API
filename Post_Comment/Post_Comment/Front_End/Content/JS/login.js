@@ -1,46 +1,42 @@
 ﻿$(document).ready(function () {
-    /*if (localStorage.authUser != null) {
-        window.location.href = "/Front_End/Views/index.html";
-    }*/
+	var login = function () {
 
-    var loadLogin = function () {
-        $.ajax({
-            url: "http://localhost:59954/api/users/logins",
-            method: "POST",
-            data: {
-                username: $("#username").val(),
-                password: $("#password").val()
-            },
-            headers: {
-                'Authorization': 'Basic ' + btoa($("#username").val() + ":" + $("#password").val()),
-            },
-            complete: function (xhr, status) {
-                if (xhr.status == 200) {
+		$.ajax({
+			url: "http://localhost:59954/api/posts/",
+			method: "GET",
+			headers: {
+				Authorization: "Basic " + btoa($("#username").val() + ":" + $("#password").val())
+			},
+			complete: function (xmlhttp, status) {
+				if ($("#username").val() != "" && $("#password").val() != "") {
+					if (xmlhttp.status == 200) {
+						$("#msg").html(xmlhttp.status + ":" + xmlhttp.statusText);
+						console.log("okk");
 
-                    localStorage.authUser = btoa($("#username").val() + ":" + $("#password").val());
-                    var user = xhr.responseJSON;
-                    localStorage.userId = user.userId;
-                    localStorage.username = user.username;
+						
+						$.session.set('user', $("#username").val());
+						$.session.set('pass', $("#password").val());
 
-                    console.log(localStorage.userId);
-                    console.log(localStorage.username);
-                    console.log(localStorage.authUser);
-                    console.log("Login Success");
+						window.location.href = "/Front_End/Views/index.html";
+					}
 
-                    window.location.href = "/Front_End/Views/index.html";
-                }
-                else {
-                    //$("#msg").show();
-                    //$("#msg").html(xhr.status + ":" + xhr.statusText);
-                    $("#msg").html("<div class=\"alert alert-primary\" role=\"alert\">" + xhr.status + ":" + xhr.statusText + "</div>");
-                }
-            }
-        });
-    }
+					else {
+						$("#msg").html("<div class=\"alert alert-danger\" role=\"alert\">" + xmlhttp.status + ":" + xmlhttp.statusText + "</div>");
+						
+						/*$("#msg").html(xmlhttp.status + ":" + xmlhttp.statusText);*/
+					}
+				}
+				else {
+					
+					$("#msg").html("<div class=\"alert alert-danger\" role=\"alert\">Fill all the Fields</div>");
+				}
+			}
+		});
+	}
 
-    $("#btnsignin").click(function () {
-        loadLogin();
-    });
+	$("#btnsignin").click(function () {
+		login();
+	});
 
 
 });

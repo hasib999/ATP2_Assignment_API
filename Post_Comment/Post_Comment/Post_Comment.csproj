@@ -92,8 +92,11 @@
     <Content Include="Front_End\Content\CSS\index.css" />
     <Content Include="Front_End\Content\JS\jquery.session.js" />
     <Content Include="Front_End\Content\JS\login.js" />
-    <Content Include="Front_End\Views\login.html" />
+    <Content Include="Front_End\Content\JS\post.js" />
+    <Content Include="Front_End\Content\JS\signup.js" />
+    <Content Include="Front_End\Content\CSS\tabstyle.css" />
     <Content Include="Front_End\Views\index.html" />
+    <Content Include="Front_End\Views\login.html" />
     <Content Include="Front_End\Views\signup.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
@@ -140,9 +143,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PostCommentDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>PostCommentDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CommentRepository.cs" />
