@@ -161,10 +161,10 @@
 						var data = xmlhttp.responseJSON;
 						var str;
 						str = "<tr><td>" + data.postId + "</td><td>"
-							+ data.postDetails + "</td><td><button btn-id-user="
+							+ data.postDetails + "</td><td><button class='btn btn-danger' btn-id-user="
 							+ data.lid + " btn-id-post=" + data.postId
-							+ " id='DeleteBtn'>Delete</button></td><td><button btn-id-postId="
-							+ data.postId + " id='loadBtn'>Load</button></td><td><button btn-id-postId="
+							+ " id='DeleteBtn'>Delete</button></td><td><button class='btn btn-primary' btn-id-postId="
+							+ data.postId + " id='loadBtn'>Load</button></td><td><button class='btn btn-warning' btn-id-postId="
 							+ data.postId + " id='viewBtn'>Comments</button></td></tr>"
 						$("#postList tbody").html(str);
 						$("#msg").html("");
@@ -268,7 +268,7 @@
 						$("#getPost").val(data[0].post.postDetails);
 						$("#hiddenPostId").val(data[0].post.postId);
 						for (var i = 0; i < data.length; i++) {
-							str += "<tr><td>" + data[i].commentId + "</td><td>" + data[i].commentDetails + "</td><td><button btn-lid-user=" + data[i].lid + " btn-id=" + data[i].commentId + " id='DeleteBtn'>Delete</button></td><td><button btn-id-commentId=" + data[i].commentId + " id='loadBtn'>Load</button></td></tr>"
+							str += "<tr><td>" + data[i].commentId + "</td><td>" + data[i].commentDetails + "</td><td><button class='btn btn-danger' btn-lid-user=" + data[i].lid + " btn-id=" + data[i].commentId + " id='DeleteBtn'>Delete</button></td><td><button class='btn btn-warning' btn-id-commentId=" + data[i].commentId + " id='loadBtn'>Load</button></td></tr>"
 						}
 						$("#commentList tbody").html(str);
 						$("#msg").html("");
@@ -316,7 +316,7 @@
 					var data = xmlhttp.responseJSON;
 					var str;
 					for (var i = 0; i < data.length; i++) {
-						str += "<tr><td>" + data[i].commentId + "</td><td>" + data[i].commentDetails + "</td><td><button btn-lid-user=" + data[i].lid + " btn-id=" + data[i].commentId + " id='DeleteBtn'>Delete</button></td><td><button btn-id-commentId=" + data[i].commentId + " id='loadBtn'>Load</button></td></tr>"
+						str += "<tr><td>" + data[i].commentId + "</td><td>" + data[i].commentDetails + "</td><td><button class='btn btn-danger' btn-lid-user=" + data[i].lid + " btn-id=" + data[i].commentId + " id='DeleteBtn'>Delete</button></td><td><button class='btn btn-warning' btn-id-commentId=" + data[i].commentId + " id='loadBtn'>Load</button></td></tr>"
 					}
 
 					$("#commentList tbody").html(str);
